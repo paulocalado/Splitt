@@ -17,7 +17,7 @@ import com.facebook.login.widget.LoginButton;
 
 public class LoginHelper {
 
-    public static void loginSuccess(LoginButton loginButton, final Context context){
+    public static void facebookLoginSuccess(LoginButton loginButton, final Context context){
 
         Profile profile = Profile.getCurrentProfile();
         Toast.makeText(context, "Ola" + profile.getFirstName(), Toast.LENGTH_LONG).show();
