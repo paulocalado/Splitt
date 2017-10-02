@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 LoginHelper.loginSuccess(loginButton, LoginActivity.this);
+
             }
 
             @Override
