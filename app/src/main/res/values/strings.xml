@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Splitt</string>
+    <string name="facebook_app_id">495992084097484</string>
+    <string name="fb_login_protocol_scheme">fb495992084097484</string>
+</resources>
