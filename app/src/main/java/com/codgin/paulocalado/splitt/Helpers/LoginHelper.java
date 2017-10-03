@@ -3,12 +3,7 @@ package com.codgin.paulocalado.splitt.Helpers;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.codgin.paulocalado.splitt.LoginActivity;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.Profile;
-import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
 /**
