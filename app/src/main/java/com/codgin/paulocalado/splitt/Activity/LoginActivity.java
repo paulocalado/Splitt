@@ -38,8 +38,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     CallbackManager callbackManager = CallbackManager.Factory.create();
     LoginButton loginButton;
 
-    private ProgressBar mProgressBar;
 
+    public Map<String, Object> userMap = new HashMap<String, Object>();
+
+    private ProgressBar mProgressBar;
     private static final int RC_SIGN_IN = 9001;
     private  GoogleApiClient mGoogleApiClient;
 
@@ -75,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onSuccess(LoginResult loginResult) {
                 Profile profile = Profile.getCurrentProfile();
                 LoginHelper.facebookLoginSuccess(loginButton, LoginActivity.this);
-                Map<String, Object> userMap = new HashMap<String, Object>();
+
                 userMap.put("idUser", profile.getId());
                 userMap.put("name", profile.getFirstName());
                 UserFirebaseService.searchUser(userMap,LoginActivity.this);
@@ -146,7 +148,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
+            userMap.put("idUser", acct.getId());
+            userMap.put("name", acct.getDisplayName());
+            UserFirebaseService.searchUser(userMap, this);
             Toast.makeText(LoginActivity.this, acct.getEmail().toString(),Toast.LENGTH_LONG).show();
+
         } else {
             // Signed out, show unauthenticated UI.
 
