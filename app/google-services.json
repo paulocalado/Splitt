@@ -1,164 +1,27 @@
 {
   "project_info": {
-    "project_number": "885556322036",
-    "firebase_url": "https://needhelp-d67fc.firebaseio.com",
-    "project_id": "needhelp-d67fc",
-    "storage_bucket": "needhelp-d67fc.appspot.com"
+    "project_number": "159787677754",
+    "firebase_url": "https://splitt-d6283.firebaseio.com",
+    "project_id": "splitt-d6283",
+    "storage_bucket": "splitt-d6283.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:885556322036:android:8c811c52c7da1efd",
-        "android_client_info": {
-          "package_name": "com.codgin.paulo.needhelp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "885556322036-u8jn1o0qsf383is705roh2abekkobdr1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.codgin.paulo.needhelp",
-            "certificate_hash": "c85d1e2757e205950c8c6aee4eebc9cbd95deef7"
-          }
-        },
-        {
-          "client_id": "885556322036-anpv0ac6jjeagl7iesjfroejpgdb2do4.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBuDOpgTYG-e_PoV9q3VaihsyfZKT2GT1M"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "885556322036-anpv0ac6jjeagl7iesjfroejpgdb2do4.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:885556322036:android:70d1d9d56d66c80f",
-        "android_client_info": {
-          "package_name": "com.codgin.paulo.mesadebar"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "885556322036-anpv0ac6jjeagl7iesjfroejpgdb2do4.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBuDOpgTYG-e_PoV9q3VaihsyfZKT2GT1M"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:885556322036:android:8b2fd5cee74189d3",
-        "android_client_info": {
-          "package_name": "com.codgin.paulo.keeppartying"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "885556322036-anpv0ac6jjeagl7iesjfroejpgdb2do4.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBuDOpgTYG-e_PoV9q3VaihsyfZKT2GT1M"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:885556322036:android:e21dbe47f7b0a3b2",
-        "android_client_info": {
-          "package_name": "com.codgin.paulo.keeppartyingadm"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "885556322036-anpv0ac6jjeagl7iesjfroejpgdb2do4.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBuDOpgTYG-e_PoV9q3VaihsyfZKT2GT1M"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:885556322036:android:f0902609a511c52f",
+        "mobilesdk_app_id": "1:159787677754:android:f0902609a511c52f",
         "android_client_info": {
           "package_name": "com.codgin.paulocalado.splitt"
         }
       },
       "oauth_client": [
         {
-          "client_id": "885556322036-anpv0ac6jjeagl7iesjfroejpgdb2do4.apps.googleusercontent.com",
+          "client_id": "159787677754-td8c7rbuqok54ljvrmo3n6qh2ahhbvah.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBuDOpgTYG-e_PoV9q3VaihsyfZKT2GT1M"
+          "current_key": "AIzaSyBQvJPP4BfdQTsuYx6xn_lUzaLlCBv6ZWo"
         }
       ],
       "services": {
