@@ -8,6 +8,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+
+import java.util.Map;
 
 /**
  * Created by Paulo on 03/10/2017.
@@ -15,8 +18,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class UserHelper {
 
-    public static void searchUserHelper(final DatabaseReference userReference, final Context context){
-        userReference.addListenerForSingleValueEvent(new ValueEventListener() {
+    public static void searchUserHelper(final DocumentReference userReference,
+                                        Map<String, Object> user,
+                                        final Context context){
+        createUser(userReference, user);
+        /*-userReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
@@ -31,10 +37,10 @@ public class UserHelper {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        });*/
     }
 
-    public static void createUser(DatabaseReference userReference){
-         userReference.setValue("criando user");
+    public static void createUser(DocumentReference userReference, Map<String, Object> user){
+         userReference.set(user);
     }
 }

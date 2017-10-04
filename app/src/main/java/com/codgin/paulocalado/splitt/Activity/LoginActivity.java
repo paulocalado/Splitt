@@ -28,6 +28,11 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
     CallbackManager callbackManager = CallbackManager.Factory.create();
@@ -64,12 +69,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         //parte responsavel pelo Login via Facebook
         loginButton = (LoginButton) findViewById(R.id.login_button);
+       // loginButton.setReadPermissions(Arrays.asList("email", "user_photos", "public_profile"));
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Profile profile = Profile.getCurrentProfile();
                 LoginHelper.facebookLoginSuccess(loginButton, LoginActivity.this);
-                UserFirebaseService.searchUser(profile.getId(),LoginActivity.this);
+                Map<String, Object> userMap = new HashMap<String, Object>();
+                userMap.put("idUser", profile.getId());
+                userMap.put("name", profile.getFirstName());
+                UserFirebaseService.searchUser(userMap,LoginActivity.this);
             }
 
             @Override
