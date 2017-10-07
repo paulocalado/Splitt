@@ -6,4 +6,8 @@
     <string name="title_activity_list_table">ListTableActivity</string>
 
     <string name="total_mesa">Total R$: </string>
+    <string name="positive_button">Sim</string>
+    <string name="negative_button">Nao</string>
+    <string name="title_criar_mesa_dialog"> Crie uma nova mesa! </string>
+    <string name="hint_criar_mesa_dialog">Começe dando um nome para ela.</string>
 </resources>

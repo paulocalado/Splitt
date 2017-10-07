@@ -15,10 +15,10 @@ import java.util.List;
 /**
  * Created by Paulo on 06/10/2017.
  */
-public class MesaAdapter extends RecyclerView.Adapter<MesaAdapter.MesaViewHolder> {
+public class TableAdapter extends RecyclerView.Adapter<TableAdapter.MesaViewHolder> {
     List<Table> listaTables;
 
-    public MesaAdapter(List<Table> listaTables){
+    public TableAdapter(List<Table> listaTables){
         this.listaTables = listaTables;
     }
 

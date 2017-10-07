@@ -1,12 +1,16 @@
 package com.codgin.paulocalado.splitt.Model;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
  * Created by Paulo on 04/10/2017.
  */
 
-public class User {
+public class User implements Serializable{
     String idUser;
     String nameUser;
     Map<String, Table> tablesUser;

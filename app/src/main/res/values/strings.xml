@@ -5,4 +5,8 @@
     <string name="title_activity_list_table">ListTableActivity</string>
 
     <string name="total_mesa">Total $: </string>
+    <string name="positive_button">Yes</string>
+    <string name="negative_button">No</string>
+    <string name="title_criar_mesa_dialog"> Create a new Table! </string>
+    <string name="hint_criar_mesa_dialog">Give a name for it!</string>
 </resources>

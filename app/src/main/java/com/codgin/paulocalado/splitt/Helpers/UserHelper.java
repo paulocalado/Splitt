@@ -35,7 +35,7 @@ public class UserHelper {
                        if(documentSnapshot.exists()){
 
                            Intent intentList = new Intent(context, TableListActivity.class);
-                           intentList.putExtra("user", (Serializable) user);
+                           intentList.putExtra("user", user);
                            context.startActivity(intentList);
                        }else{
 
