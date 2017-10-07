@@ -12,6 +12,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -25,20 +27,18 @@ public class TableHelper {
 
     public static void getTablesHelper(CollectionReference tableRef, final Context context, final RecyclerView rvTable){
         final List<Table> tableList = new ArrayList<>();
-        tableRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        tableRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
                 if(tableList.size()!=0){
                     tableList.clear();
                 }
-                if(task.isSuccessful()){
-                    for (DocumentSnapshot document : task.getResult()){
-                        tableList.add(document.toObject(Table.class));
-                    }
-                    TableLayoutControl.setLayoutTables(tableList, context, rvTable);
+                for(DocumentSnapshot document : documentSnapshots){
+                    tableList.add(document.toObject(Table.class));
                 }
-
+                TableLayoutControl.setLayoutTables(tableList, context, rvTable);
             }
         });
+    
     }
 }

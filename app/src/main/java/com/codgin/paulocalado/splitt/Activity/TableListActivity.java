@@ -46,7 +46,7 @@ public class TableListActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onResume(){
         super.onResume();
-
+        Toast.makeText(this, "resumiu", Toast.LENGTH_LONG).show();
         TableFirebaseService.getTables(user, TableListActivity.this, rvTable);
     }
 
