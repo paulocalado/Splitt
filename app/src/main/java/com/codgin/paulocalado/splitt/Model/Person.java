@@ -1,8 +1,8 @@
 package com.codgin.paulocalado.splitt.Model;
 
 /**
- * Created by Paulo on 04/10/2017.
+ * Created by Paulo on 07/10/2017.
  */
 
-public class Mesa {
+public class Person {
 }

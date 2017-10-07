@@ -3,6 +3,7 @@ package com.codgin.paulocalado.splitt.Services;
 import android.content.Context;
 
 import com.codgin.paulocalado.splitt.Helpers.UserHelper;
+import com.codgin.paulocalado.splitt.Model.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -16,9 +17,9 @@ import java.util.Map;
 
 public class UserFirebaseService {
 
-    public static void searchUser(final Map<String, Object> user, Context context){
+    public static void searchUser(final User user, Context context){
 
-        DocumentReference userFirestoreReference = FirebaseFirestore.getInstance().document("users/"+user.get("idUser"));
+        DocumentReference userFirestoreReference = FirebaseFirestore.getInstance().document("users/"+user.getIdUser());
         UserHelper.searchUserHelper(userFirestoreReference, user,context);
     }
 }

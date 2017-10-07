@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.codgin.paulocalado.splitt.Helpers.LoginHelper;
+import com.codgin.paulocalado.splitt.Model.User;
 import com.codgin.paulocalado.splitt.R;
 import com.codgin.paulocalado.splitt.Services.UserFirebaseService;
 import com.facebook.CallbackManager;
@@ -39,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     LoginButton loginButton;
 
 
-    public Map<String, Object> userMap = new HashMap<String, Object>();
+    public User userMap = new User();
 
     private ProgressBar mProgressBar;
     private static final int RC_SIGN_IN = 9001;
@@ -77,9 +78,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onSuccess(LoginResult loginResult) {
                 Profile profile = Profile.getCurrentProfile();
                 LoginHelper.facebookLoginSuccess(loginButton, LoginActivity.this);
-
-                userMap.put("idUser", profile.getId());
-                userMap.put("name", profile.getFirstName());
+                userMap.setIdUser(profile.getId());
+                userMap.setNameUser(profile.getFirstName());
                 UserFirebaseService.searchUser(userMap,LoginActivity.this);
             }
 
@@ -148,8 +148,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            userMap.put("idUser", acct.getId());
-            userMap.put("name", acct.getDisplayName());
+            userMap.setIdUser(acct.getId());
+            userMap.setNameUser(acct.getDisplayName());
             UserFirebaseService.searchUser(userMap, this);
             Toast.makeText(LoginActivity.this, acct.getEmail().toString(),Toast.LENGTH_LONG).show();
 
