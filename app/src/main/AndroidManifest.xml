@@ -39,7 +39,10 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".Activity.TableListActivity"></activity>
+        <activity android:name=".Activity.TableListActivity" />
+        <activity
+            android:name=".Activity.HomeActivity"
+            android:label="@string/title_activity_home"></activity>
     </application>
 
 </manifest>

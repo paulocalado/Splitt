@@ -1,10 +1,12 @@
 package com.codgin.paulocalado.splitt.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by Paulo on 04/10/2017.
  */
 
-public class Table {
+public class Table implements Serializable {
     String nameTable;
     double total;
     double totalWithTip;
