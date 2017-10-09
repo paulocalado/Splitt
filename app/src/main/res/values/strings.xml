@@ -9,4 +9,5 @@
     <string name="negative_button">No</string>
     <string name="title_criar_mesa_dialog"> Create a new Table! </string>
     <string name="hint_criar_mesa_dialog">Give a name for it!</string>
+    <string name="text_empty_mesa">Oops, nothing found :(</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import com.codgin.paulocalado.splitt.Helpers.TableHelper;
+import com.codgin.paulocalado.splitt.Model.ModelGetTable;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.Model.User;
 import com.google.firebase.firestore.CollectionReference;
@@ -23,11 +24,11 @@ public class TableFirebaseService {
         tableRef.set(table);
     }
 
-    public static void getTables(User user, Context context, RecyclerView rvTable){
+    public static void getTables(User user, ModelGetTable modelGetTable){
         CollectionReference tableRef = FirebaseFirestore.getInstance().collection("users/"+user.getIdUser()+
                 "/tables");
 
-        TableHelper.getTablesHelper(tableRef, context, rvTable);
+        TableHelper.getTablesHelper(tableRef, modelGetTable);
 
     }
 }

@@ -9,8 +9,11 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codgin.paulocalado.splitt.Model.ModelGetTable;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.Model.User;
 import com.codgin.paulocalado.splitt.R;
@@ -19,6 +22,7 @@ import com.codgin.paulocalado.splitt.Services.TableFirebaseService;
 public class TableListActivity extends AppCompatActivity implements View.OnClickListener {
     public User user;
     public RecyclerView rvTable;
+    public ModelGetTable modelGetTable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +31,16 @@ public class TableListActivity extends AppCompatActivity implements View.OnClick
          Intent intentLoging = getIntent();
          user = (User) intentLoging.getSerializableExtra("user");
 
+        ImageView imageEmpty = (ImageView)findViewById(R.id.sadImage);
+        TextView textEmpty = (TextView)findViewById(R.id.empty_view);
+
         rvTable = (RecyclerView)findViewById(R.id.rvTables);
         findViewById(R.id.floatAddTable).setOnClickListener(this);
 
 
-        TableFirebaseService.getTables(user,TableListActivity.this, rvTable);
+        modelGetTable = new ModelGetTable(rvTable, TableListActivity.this, imageEmpty, textEmpty);
+
+        TableFirebaseService.getTables(user,modelGetTable);
     }
 
     @Override
@@ -47,7 +56,7 @@ public class TableListActivity extends AppCompatActivity implements View.OnClick
     protected void onResume(){
         super.onResume();
         Toast.makeText(this, "resumiu", Toast.LENGTH_LONG).show();
-        TableFirebaseService.getTables(user, TableListActivity.this, rvTable);
+        TableFirebaseService.getTables(user, modelGetTable);
     }
 
     public void dialogAddTable(){

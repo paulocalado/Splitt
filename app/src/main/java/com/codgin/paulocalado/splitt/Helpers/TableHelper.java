@@ -3,8 +3,10 @@ package com.codgin.paulocalado.splitt.Helpers;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.codgin.paulocalado.splitt.Control.TableLayoutControl;
+import com.codgin.paulocalado.splitt.Model.ModelGetTable;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,7 +27,7 @@ import java.util.List;
 
 public class TableHelper {
 
-    public static void getTablesHelper(CollectionReference tableRef, final Context context, final RecyclerView rvTable){
+    public static void getTablesHelper(CollectionReference tableRef, final ModelGetTable modelGetTable){
         final List<Table> tableList = new ArrayList<>();
         tableRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -35,10 +37,19 @@ public class TableHelper {
                 }
                 for(DocumentSnapshot document : documentSnapshots){
                     tableList.add(document.toObject(Table.class));
+
                 }
-                TableLayoutControl.setLayoutTables(tableList, context, rvTable);
+                if(tableList.size()==0){
+                    modelGetTable.getImageEmpty().setVisibility(View.VISIBLE);
+                    modelGetTable.getTextEmpty().setVisibility(View.VISIBLE);
+                }else{
+                    modelGetTable.getImageEmpty().setVisibility(View.GONE);
+                    modelGetTable.getTextEmpty().setVisibility(View.GONE);
+                }
+
+                TableLayoutControl.setLayoutTables(tableList, modelGetTable.getContext(), modelGetTable.getRvTable());
             }
         });
-    
+
     }
 }

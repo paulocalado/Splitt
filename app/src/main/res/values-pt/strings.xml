@@ -10,4 +10,5 @@
     <string name="negative_button">Nao</string>
     <string name="title_criar_mesa_dialog"> Crie uma nova mesa! </string>
     <string name="hint_criar_mesa_dialog">Começe dando um nome para ela.</string>
+    <string name="text_empty_mesa">Aqui deviam estar suas mesas, mas parece que você esta sem nenhuma no momento :(</string>
 </resources>
