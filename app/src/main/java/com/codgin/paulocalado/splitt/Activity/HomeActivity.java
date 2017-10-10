@@ -8,12 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.codgin.paulocalado.splitt.Fragments.PeopleFragment;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.R;
 
 public class HomeActivity extends AppCompatActivity {
     public Table table;
-    private TextView mTextMessage;
+    public Bundle bundle = new Bundle();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -22,13 +23,19 @@ public class HomeActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(table.getQtPeople()+table.getNameTable());
+                    PeopleFragment peopleFragment = new PeopleFragment();
+                    bundle.putSerializable("table", table);
+                    peopleFragment.setArguments(bundle);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.content, peopleFragment, "peopleFragment")
+                            .addToBackStack(null)
+                            .commit();
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
                     return true;
             }
             return false;
@@ -44,9 +51,24 @@ public class HomeActivity extends AppCompatActivity {
         Intent intentTable = getIntent();
         table = (Table) intentTable.getSerializableExtra("table");
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        PeopleFragment peopleFragment = new PeopleFragment();
+        bundle.putSerializable("table", table);
+        peopleFragment.setArguments(bundle);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content, peopleFragment, "peopleFragment")
+                .addToBackStack(null)
+                .commit();
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        finish();
+
     }
 
 }
