@@ -1,5 +1,6 @@
 package com.codgin.paulocalado.splitt.Helpers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -28,6 +29,7 @@ public class UserHelper {
     public static void searchUserHelper(final DocumentReference userReference,
                                         final User user,
                                         final Context context){
+
        userReference.get()
                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                    @Override
@@ -37,6 +39,7 @@ public class UserHelper {
                            Intent intentList = new Intent(context, TableListActivity.class);
                            intentList.putExtra("user", user);
                            context.startActivity(intentList);
+
                        }else{
 
                            createUser(userReference, user);

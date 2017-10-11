@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.codgin.paulocalado.splitt.Helpers.DelayedProgressDialog;
 import com.codgin.paulocalado.splitt.Helpers.LoginHelper;
 import com.codgin.paulocalado.splitt.Model.User;
 import com.codgin.paulocalado.splitt.R;
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     CallbackManager callbackManager = CallbackManager.Factory.create();
     LoginButton loginButton;
 
+    DelayedProgressDialog progressDialog = new DelayedProgressDialog();
 
     public User userMap = new User();
 
@@ -125,6 +127,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         callbackManager.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
@@ -145,6 +148,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
+
+        progressDialog.show(getSupportFragmentManager(), "tag");
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();

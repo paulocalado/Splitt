@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codgin.paulocalado.splitt.Helpers.DelayedProgressDialog;
 import com.codgin.paulocalado.splitt.Model.ModelGetTable;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.Model.User;
@@ -47,7 +48,9 @@ public class TableListActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.floatAddTable:
-                dialogAddTable();
+                DelayedProgressDialog progressDialog = new DelayedProgressDialog();
+                progressDialog.show(getSupportFragmentManager(), "tag");
+               // dialogAddTable();
                 break;
         }
     }
