@@ -39,7 +39,7 @@ public class TableListActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.floatAddTable).setOnClickListener(this);
 
 
-        modelGetTable = new ModelGetTable(rvTable, TableListActivity.this, imageEmpty, textEmpty);
+        modelGetTable = new ModelGetTable(rvTable, TableListActivity.this, imageEmpty, textEmpty, user);
 
         TableFirebaseService.getTables(user,modelGetTable);
     }
@@ -48,9 +48,7 @@ public class TableListActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.floatAddTable:
-                DelayedProgressDialog progressDialog = new DelayedProgressDialog();
-                progressDialog.show(getSupportFragmentManager(), "tag");
-               // dialogAddTable();
+                dialogAddTable();
                 break;
         }
     }

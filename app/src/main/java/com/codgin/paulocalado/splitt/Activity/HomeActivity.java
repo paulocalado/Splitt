@@ -10,10 +10,12 @@ import android.widget.TextView;
 
 import com.codgin.paulocalado.splitt.Fragments.PeopleFragment;
 import com.codgin.paulocalado.splitt.Model.Table;
+import com.codgin.paulocalado.splitt.Model.User;
 import com.codgin.paulocalado.splitt.R;
 
 public class HomeActivity extends AppCompatActivity {
     public Table table;
+    public User user;
     public Bundle bundle = new Bundle();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -25,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     PeopleFragment peopleFragment = new PeopleFragment();
                     bundle.putSerializable("table", table);
+                    bundle.putSerializable("user", user);
                     peopleFragment.setArguments(bundle);
                     getSupportFragmentManager()
                             .beginTransaction()
@@ -50,7 +53,7 @@ public class HomeActivity extends AppCompatActivity {
 
         Intent intentTable = getIntent();
         table = (Table) intentTable.getSerializableExtra("table");
-
+        user = (User)intentTable.getSerializableExtra("user");
         PeopleFragment peopleFragment = new PeopleFragment();
         bundle.putSerializable("table", table);
         peopleFragment.setArguments(bundle);

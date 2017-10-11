@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.codgin.paulocalado.splitt.Activity.HomeActivity;
 import com.codgin.paulocalado.splitt.Adapters.TableAdapter;
+import com.codgin.paulocalado.splitt.Model.ModelGetTable;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.RecyclerItemClickListener;
 
@@ -21,17 +22,18 @@ import java.util.List;
 
 public class TableLayoutControl {
 
-    public static void setLayoutTables(final List<Table> tableList, final Context context, RecyclerView rvTables){
+    public static void setLayoutTables(final List<Table> tableList, final ModelGetTable modelGetTable){
         TableAdapter adapter = new TableAdapter(tableList);
-        LinearLayoutManager llm = new LinearLayoutManager(context);
-        rvTables.setLayoutManager(llm);
-        rvTables.setAdapter(adapter);
-        rvTables.addOnItemTouchListener(new RecyclerItemClickListener(context, rvTables, new RecyclerItemClickListener.OnItemClickListener() {
+        LinearLayoutManager llm = new LinearLayoutManager(modelGetTable.getContext());
+        modelGetTable.getRvTable().setLayoutManager(llm);
+        modelGetTable.getRvTable().setAdapter(adapter);
+        modelGetTable.getRvTable().addOnItemTouchListener(new RecyclerItemClickListener(modelGetTable.getContext(), modelGetTable.getRvTable(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intentHome = new Intent(context, HomeActivity.class);
+                Intent intentHome = new Intent(modelGetTable.getContext(), HomeActivity.class);
                 intentHome.putExtra("table", tableList.get(position));
-                context.startActivity(intentHome);
+                intentHome.putExtra("user", modelGetTable.getUser());
+                modelGetTable.getContext().startActivity(intentHome);
             }
 
             @Override

@@ -47,7 +47,7 @@ public class TableHelper {
                     modelGetTable.getTextEmpty().setVisibility(View.GONE);
                 }
 
-                TableLayoutControl.setLayoutTables(tableList, modelGetTable.getContext(), modelGetTable.getRvTable());
+                TableLayoutControl.setLayoutTables(tableList, modelGetTable);
             }
         });
 

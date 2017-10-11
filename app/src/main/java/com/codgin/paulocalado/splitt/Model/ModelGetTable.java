@@ -18,6 +18,7 @@ public class ModelGetTable {
     Context context;
     ImageView imageEmpty;
     TextView textEmpty;
+    User user;
 
     public ModelGetTable(CollectionReference refTable, RecyclerView rvTable, Context context, ImageView imageEmpty, TextView textEmpty) {
         this.refTable = refTable;
@@ -27,11 +28,20 @@ public class ModelGetTable {
         this.textEmpty = textEmpty;
     }
 
-    public ModelGetTable(RecyclerView rvTable, Context context, ImageView imageEmpty, TextView textEmpty) {
+    public ModelGetTable(RecyclerView rvTable, Context context, ImageView imageEmpty, TextView textEmpty, User user) {
         this.rvTable = rvTable;
         this.context = context;
         this.imageEmpty = imageEmpty;
         this.textEmpty = textEmpty;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public CollectionReference getRefTable() {

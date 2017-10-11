@@ -1,6 +1,8 @@
 package com.codgin.paulocalado.splitt.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,23 +10,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import com.codgin.paulocalado.splitt.Model.Person;
+import com.codgin.paulocalado.splitt.Model.Table;
+import com.codgin.paulocalado.splitt.Model.User;
 import com.codgin.paulocalado.splitt.R;
+import com.codgin.paulocalado.splitt.Services.PersonFirebaseService;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PeopleFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link PeopleFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class PeopleFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+public class PeopleFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    public Table table;
+    public User user;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -35,15 +35,6 @@ public class PeopleFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PeopleFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static PeopleFragment newInstance(String param1, String param2) {
         PeopleFragment fragment = new PeopleFragment();
         Bundle args = new Bundle();
@@ -68,11 +59,22 @@ public class PeopleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_people, container, false);
-
+        Bundle bundleHome = this.getArguments();
+        table = (Table) bundleHome.getSerializable("table");
+        user = (User) bundleHome.getSerializable("user");
+        v.findViewById(R.id.floatAddPerson).setOnClickListener(this);
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.floatAddPerson:
+                dialogAddPerson();
+                break;
+        }
+    }
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -91,18 +93,38 @@ public class PeopleFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+    public void dialogAddPerson(){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+        builder1.setMessage(R.string.title_criar_mesa_dialog);
+        builder1.setCancelable(false);
+        final EditText input = new EditText(getContext());
+        input.setHint(R.string.hint_criar_mesa_dialog);
+        builder1.setView(input);
+        builder1.setPositiveButton(
+                R.string.positive_button,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Person person = new Person();
+                        person.setName(input.getText().toString());
+                        PersonFirebaseService.createPersonFirebase(user, table,person);
+                        dialog.cancel();
+                    }
+                });
+
+        builder1.setNegativeButton(
+                R.string.negative_button,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 }
