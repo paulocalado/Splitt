@@ -56,6 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         user = (User)intentTable.getSerializableExtra("user");
         PeopleFragment peopleFragment = new PeopleFragment();
         bundle.putSerializable("table", table);
+        bundle.putSerializable("user", user);
         peopleFragment.setArguments(bundle);
         getSupportFragmentManager()
                 .beginTransaction()
