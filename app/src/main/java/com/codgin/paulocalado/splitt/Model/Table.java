@@ -1,6 +1,7 @@
 package com.codgin.paulocalado.splitt.Model;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * Created by Paulo on 04/10/2017.
@@ -12,8 +13,17 @@ public class Table implements Serializable {
     double totalWithTip;
     int tip;
     int qtPeople;
+    Map<String, Person> people;
 
     public Table(){}
+
+    public Map<String, Person> getPeople() {
+        return people;
+    }
+
+    public void setPeople(Map<String, Person> people) {
+        this.people = people;
+    }
 
     public int getQtPeople() {
         return qtPeople;

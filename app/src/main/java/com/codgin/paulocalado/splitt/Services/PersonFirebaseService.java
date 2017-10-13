@@ -1,8 +1,11 @@
 package com.codgin.paulocalado.splitt.Services;
 
+import com.codgin.paulocalado.splitt.Helpers.PersonHelper;
+import com.codgin.paulocalado.splitt.Model.ModelGetPerson;
 import com.codgin.paulocalado.splitt.Model.Person;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.Model.User;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -13,9 +16,19 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class PersonFirebaseService {
 
         public static void createPersonFirebase(User user, Table table, Person person){
-            DocumentReference tableRef = FirebaseFirestore.getInstance().document("users/"+user.getIdUser()+
+            DocumentReference personRef = FirebaseFirestore.getInstance().document("users/"+user.getIdUser()+
                     "/tables/"+table.getNameTable()+"/people/"+person.getName());
 
-            tableRef.set(person);
+            personRef.set(person);
+        }
+
+        public static void getPeopleFirebase(ModelGetPerson modelGetPerson){
+            CollectionReference personRef = FirebaseFirestore.getInstance().collection("users/"+
+                    modelGetPerson.getUser().getIdUser()+"/tables/"+modelGetPerson.getTable().getNameTable()+
+                    "/people");
+
+            modelGetPerson.setRefPerson(personRef);
+
+            PersonHelper.getPeopleHelper(modelGetPerson);
         }
 }
