@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.codgin.paulocalado.splitt.Control.TableLayoutControl;
 import com.codgin.paulocalado.splitt.Model.ModelGetTable;
+import com.codgin.paulocalado.splitt.Model.Product;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -19,7 +20,9 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by paulocalado on 07/10/17.
@@ -48,6 +51,33 @@ public class TableHelper {
                 }
 
                 TableLayoutControl.setLayoutTables(tableList, modelGetTable);
+            }
+        });
+
+    }
+
+    public static void setTotalTable(CollectionReference productRef, final DocumentReference tableRef, final Table table){
+        final List<Product> productList = new ArrayList<>();
+
+        productRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                double total = 0;
+
+                if(productList.size()!=0){
+                    productList.clear();
+                }
+                for(DocumentSnapshot document : documentSnapshots){
+                    productList.add(document.toObject(Product.class));
+
+                }
+                for(Product product : productList){
+                    total+=product.getProductTotal();
+                }
+
+              table.setTotal(total);
+                tableRef.set(table);
+
             }
         });
 

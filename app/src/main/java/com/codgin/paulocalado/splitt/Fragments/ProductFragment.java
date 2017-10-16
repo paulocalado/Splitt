@@ -2,6 +2,7 @@ package com.codgin.paulocalado.splitt.Fragments;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -19,12 +20,15 @@ import android.widget.LinearLayout;
 import com.codgin.paulocalado.splitt.Helpers.PersonHelper;
 import com.codgin.paulocalado.splitt.Model.ModelGetPerson;
 import com.codgin.paulocalado.splitt.Model.Person;
+import com.codgin.paulocalado.splitt.Model.Product;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.Model.User;
 import com.codgin.paulocalado.splitt.R;
+import com.codgin.paulocalado.splitt.Services.ProductFirebaseService;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -98,6 +102,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
             case R.id.floatAddProduct:
                 dialogAddProduto();
                 break;
+
         }
     }
 
@@ -123,30 +128,43 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
         dialog.setContentView(R.layout.dialog_add_produto);
         dialog.setTitle("Adicione a seu Pedido");
 
+        final List<Person> checkedPeople = new ArrayList<>();
         LinearLayout linearLayout = (LinearLayout) dialog.findViewById(R.id.lista_pessoa_dialog);
-        final TextInputLayout edtNomeProduto = (TextInputLayout) dialog.findViewById(R.id.edtDialogNomeProduto);
-        final TextInputLayout edtValorProduto = (TextInputLayout)dialog.findViewById(R.id.edit_valor_dialog);
-        final TextInputLayout edtQtdProduto = (TextInputLayout)dialog.findViewById(R.id.edit_quantidade_produto);
-        Button btnAdicionarProduto = (Button)dialog.findViewById(R.id.btnAdicionarProduto);
+        final TextInputLayout edtProductName = (TextInputLayout) dialog.findViewById(R.id.edtDialogNomeProduto);
+        final TextInputLayout edtProductPrice = (TextInputLayout)dialog.findViewById(R.id.edit_valor_dialog);
+        final TextInputLayout edtProductQt = (TextInputLayout)dialog.findViewById(R.id.edit_quantidade_produto);
+        Button btnAddProduct = (Button)dialog.findViewById(R.id.btnAdicionarProduto);
 
         for(final Person person: personList){
             CheckBox checkBox = new AppCompatCheckBox(getContext());
             checkBox.setText(person.getName());
+            checkBox.setTextColor(Color.rgb(192,77,249));
 
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                     if(isChecked){
-                        personList.add(person);
+                        checkedPeople.add(person);
                         //listaPessoa.remove(pessoa);
                     }else{
-                        personList.remove(person);
+                        checkedPeople.remove(person);
                     }
 
                 }
             });
             linearLayout.addView(checkBox);
         }
+
+        btnAddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Product productToAdd = new Product(edtProductName.getEditText().getText().toString(),
+                        Double.parseDouble(edtProductPrice.getEditText().getText().toString()),
+                        Integer.parseInt(edtProductQt.getEditText().getText().toString()));
+
+                ProductFirebaseService.addProductTable(user,table,productToAdd);
+            }
+        });
 
         dialog.show();
     }

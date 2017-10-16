@@ -1,0 +1,33 @@
+package com.codgin.paulocalado.splitt.Services;
+
+import com.codgin.paulocalado.splitt.Control.CalculatorControl;
+import com.codgin.paulocalado.splitt.Helpers.TableHelper;
+import com.codgin.paulocalado.splitt.Model.Product;
+import com.codgin.paulocalado.splitt.Model.Table;
+import com.codgin.paulocalado.splitt.Model.User;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+/**
+ * Created by paulocalado on 16/10/17.
+ */
+
+public class ProductFirebaseService {
+
+    public static void addProductTable(User user, Table table, Product product){
+        DocumentReference productRef = FirebaseFirestore.getInstance().document("users/"+user.getIdUser()+
+                "/tables/"+table.getNameTable()+"/products/"+product.getProductName());
+
+        CollectionReference collectionProductRef = FirebaseFirestore.getInstance().collection("users/"+user.getIdUser()+
+                        "/tables/"+table.getNameTable()+"/products");
+
+        DocumentReference tableRef = FirebaseFirestore.getInstance().document("users/"+user.getIdUser()+
+                "/tables/"+table.getNameTable());
+
+        product.setProductTotal(CalculatorControl.totalPerProduct(product.getProductQt(), product.getProductPrice()));
+
+        productRef.set(product);
+        TableHelper.setTotalTable(collectionProductRef, tableRef, table);
+    }
+}
