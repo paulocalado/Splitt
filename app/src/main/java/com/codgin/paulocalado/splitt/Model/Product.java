@@ -5,4 +5,15 @@ package com.codgin.paulocalado.splitt.Model;
  */
 
 public class Product {
+    String productName;
+
+    public Product(){}
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 }

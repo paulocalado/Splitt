@@ -5,8 +5,12 @@ import android.view.View;
 import com.codgin.paulocalado.splitt.Control.PeopleLayoutControl;
 import com.codgin.paulocalado.splitt.Model.ModelGetPerson;
 import com.codgin.paulocalado.splitt.Model.Person;
+import com.codgin.paulocalado.splitt.Model.Table;
+import com.codgin.paulocalado.splitt.Model.User;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -42,5 +46,26 @@ public class PersonHelper {
                 PeopleLayoutControl.setLayoutRVPeople(personList, modelGetPerson);
             }
         });
+    }
+
+    public static List<Person> getPeopleToAddProduct(User user, Table table){
+        final List<Person> personList = new ArrayList<>();
+        CollectionReference personRef = FirebaseFirestore.getInstance().collection("users/"+
+                user.getIdUser()+"/tables/"+table.getNameTable()+
+                "/people");
+
+        personRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                if(personList.size()>0){
+                    personList.clear();
+                }
+                for(DocumentSnapshot document : documentSnapshots){
+                    personList.add(document.toObject(Person.class));
+                }
+            }
+        });
+
+        return personList;
     }
 }
