@@ -60,6 +60,13 @@ public class TableListActivity extends AppCompatActivity implements View.OnClick
         TableFirebaseService.getTables(user, modelGetTable);
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        finish();
+
+    }
+
     public void dialogAddTable(){
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
         builder1.setMessage(R.string.title_criar_mesa_dialog);

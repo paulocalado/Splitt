@@ -27,7 +27,8 @@ public class TableLayoutControl {
         LinearLayoutManager llm = new LinearLayoutManager(modelGetTable.getContext());
         modelGetTable.getRvTable().setLayoutManager(llm);
         modelGetTable.getRvTable().setAdapter(adapter);
-        modelGetTable.getRvTable().addOnItemTouchListener(new RecyclerItemClickListener(modelGetTable.getContext(), modelGetTable.getRvTable(), new RecyclerItemClickListener.OnItemClickListener() {
+        modelGetTable.getRvTable().addOnItemTouchListener(new RecyclerItemClickListener(modelGetTable.getContext(),
+                modelGetTable.getRvTable(), new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intentHome = new Intent(modelGetTable.getContext(), HomeActivity.class);

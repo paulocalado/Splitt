@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.codgin.paulocalado.splitt.Fragments.PeopleFragment;
+import com.codgin.paulocalado.splitt.Fragments.ProductFragment;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.Model.User;
 import com.codgin.paulocalado.splitt.R;
@@ -36,7 +37,15 @@ public class HomeActivity extends AppCompatActivity {
                             .commit();
                     return true;
                 case R.id.navigation_dashboard:
-
+                    ProductFragment productFragment = new ProductFragment();
+                    bundle.putSerializable("table", table);
+                    bundle.putSerializable("user", user);
+                    productFragment.setArguments(bundle);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.content, productFragment, "productFragment")
+                            .addToBackStack(null)
+                            .commit();
                     return true;
                 case R.id.navigation_notifications:
                     return true;
