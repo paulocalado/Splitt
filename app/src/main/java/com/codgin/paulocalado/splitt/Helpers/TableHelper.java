@@ -56,7 +56,7 @@ public class TableHelper {
 
     }
 
-    public static void setTotalTable(CollectionReference productRef, final DocumentReference tableRef, final Table table){
+    public static void setTotalTable(CollectionReference productRef, final DocumentReference tableRef){
         final List<Product> productList = new ArrayList<>();
 
         productRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -75,8 +75,7 @@ public class TableHelper {
                     total+=product.getProductTotal();
                 }
 
-              table.setTotal(total);
-                tableRef.set(table);
+                tableRef.update("total",total);
 
             }
         });

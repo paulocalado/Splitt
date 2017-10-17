@@ -30,7 +30,7 @@ public class ProductFirebaseService {
         product.setProductTotal(CalculatorControl.totalPerProduct(product.getProductQt(), product.getProductPrice()));
 
         productRef.set(product);
-        TableHelper.setTotalTable(collectionProductRef, tableRef, table);
+        TableHelper.setTotalTable(collectionProductRef, tableRef);
     }
 
     public static void getProduct(ModelGetProduct modelGetProduct){
