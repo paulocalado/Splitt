@@ -21,6 +21,8 @@
     <string name="titulo_dialog_add_produto">Time to add a new product:</string>
     <string name="subtitulo_listaPessoas_dialog_produto">Choose the ones who will consume this</string>
 
+    <string name="preco_produto">Price $:</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

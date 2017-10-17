@@ -17,4 +17,6 @@
     <string name="edit_dialog_nome_produto">Nos diga o nome do produto</string>
     <string name="btn_adicionar_pessoa">Adicione uma pessoa a sua mesa!</string>
     <string name="subtitulo_listaPessoas_dialog_produto">Com quem você vai dividir?</string>
+
+    <string name="preco_produto">Preço R$:</string>
 </resources>

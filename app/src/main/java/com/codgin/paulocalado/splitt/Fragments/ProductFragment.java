@@ -27,6 +27,7 @@ import com.codgin.paulocalado.splitt.Model.Product;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.Model.User;
 import com.codgin.paulocalado.splitt.R;
+import com.codgin.paulocalado.splitt.Services.PersonFirebaseService;
 import com.codgin.paulocalado.splitt.Services.ProductFirebaseService;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -175,6 +176,9 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
                         Integer.parseInt(edtProductQt.getEditText().getText().toString()));
 
                 ProductFirebaseService.addProductTable(user,table,productToAdd);
+                PersonFirebaseService.addProductPerson(checkedPeople, user, table, productToAdd);
+                
+                dialog.dismiss();
             }
         });
 

@@ -31,7 +31,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
-        holder.txtNameProduct.setText(productList.get(position).getProductName());
+        holder.txtNameProduct.setText(productList.get(position).getProductName()+" x"+productList.get(position).getProductQt());
+        holder.txtProductValue.setText(holder.txtProductValue.getContext().getResources().getString(R.string.preco_produto)
+        +String.format("%.2f",productList.get(position).getProductPrice()));
+        holder.txtProductQt.setText(holder.txtProductQt.getContext().getResources().getString(R.string.total_mesa)
+        +String.format("%.2f", productList.get(position).getProductTotal()));
+
     }
 
     @Override

@@ -13,4 +13,12 @@ public class CalculatorControl {
 
         return total;
     }
+
+    public static double totalProductPerPerson(int qtdProduct, int qtdPessoa, double productPrice){
+        double total =0;
+
+        total = (qtdProduct*productPrice)/qtdPessoa;
+
+        return total;
+    }
 }

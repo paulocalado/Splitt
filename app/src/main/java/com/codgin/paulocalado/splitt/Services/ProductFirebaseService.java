@@ -4,12 +4,15 @@ import com.codgin.paulocalado.splitt.Control.CalculatorControl;
 import com.codgin.paulocalado.splitt.Helpers.ProductHelper;
 import com.codgin.paulocalado.splitt.Helpers.TableHelper;
 import com.codgin.paulocalado.splitt.Model.ModelGetProduct;
+import com.codgin.paulocalado.splitt.Model.Person;
 import com.codgin.paulocalado.splitt.Model.Product;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.Model.User;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.List;
 
 /**
  * Created by paulocalado on 16/10/17.
@@ -32,6 +35,7 @@ public class ProductFirebaseService {
         productRef.set(product);
         TableHelper.setTotalTable(collectionProductRef, tableRef);
     }
+
 
     public static void getProduct(ModelGetProduct modelGetProduct){
         CollectionReference collectionProductRef = FirebaseFirestore.getInstance().collection("users/"+
