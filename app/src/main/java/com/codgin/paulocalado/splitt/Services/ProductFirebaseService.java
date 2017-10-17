@@ -1,7 +1,9 @@
 package com.codgin.paulocalado.splitt.Services;
 
 import com.codgin.paulocalado.splitt.Control.CalculatorControl;
+import com.codgin.paulocalado.splitt.Helpers.ProductHelper;
 import com.codgin.paulocalado.splitt.Helpers.TableHelper;
+import com.codgin.paulocalado.splitt.Model.ModelGetProduct;
 import com.codgin.paulocalado.splitt.Model.Product;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.Model.User;
@@ -29,5 +31,15 @@ public class ProductFirebaseService {
 
         productRef.set(product);
         TableHelper.setTotalTable(collectionProductRef, tableRef, table);
+    }
+
+    public static void getProduct(ModelGetProduct modelGetProduct){
+        CollectionReference collectionProductRef = FirebaseFirestore.getInstance().collection("users/"+
+                modelGetProduct.getUser().getIdUser()+
+                "/tables/"+modelGetProduct.getTable().getNameTable()+"/products");
+
+        modelGetProduct.setRefProduct(collectionProductRef);
+
+        ProductHelper.getProduct(modelGetProduct);
     }
 }

@@ -15,10 +15,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.codgin.paulocalado.splitt.Helpers.PersonHelper;
 import com.codgin.paulocalado.splitt.Model.ModelGetPerson;
+import com.codgin.paulocalado.splitt.Model.ModelGetProduct;
 import com.codgin.paulocalado.splitt.Model.Person;
 import com.codgin.paulocalado.splitt.Model.Product;
 import com.codgin.paulocalado.splitt.Model.Table;
@@ -83,6 +86,15 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
         user = (User) bundleHome.getSerializable("user");
 
         personList = PersonHelper.getPeopleToAddProduct(user,table);
+
+        RecyclerView rvProduct = (RecyclerView)v.findViewById(R.id.rvProduct);
+        TextView textEmpty = (TextView)v.findViewById(R.id.empty_view);
+        ImageView sadImage = (ImageView)v.findViewById(R.id.sadImage);
+
+        ModelGetProduct modelGetProduct = new ModelGetProduct(rvProduct,getContext(),sadImage,
+                textEmpty, user, table);
+
+        ProductFirebaseService.getProduct(modelGetProduct);
 
         v.findViewById(R.id.floatAddProduct).setOnClickListener(this);
 
