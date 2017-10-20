@@ -30,7 +30,7 @@ import java.util.Map;
 
 public class TableHelper {
 
-    public static void getTablesHelper(CollectionReference tableRef, final ModelGetTable modelGetTable){
+    public static void getTablesHelper(final CollectionReference tableRef, final ModelGetTable modelGetTable){
         final List<Table> tableList = new ArrayList<>();
         tableRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -42,6 +42,7 @@ public class TableHelper {
                     tableList.add(document.toObject(Table.class));
 
                 }
+
                 if(tableList.size()==0){
                     modelGetTable.getImageEmpty().setVisibility(View.VISIBLE);
                     modelGetTable.getTextEmpty().setVisibility(View.VISIBLE);
@@ -49,6 +50,7 @@ public class TableHelper {
                     modelGetTable.getImageEmpty().setVisibility(View.GONE);
                     modelGetTable.getTextEmpty().setVisibility(View.GONE);
                 }
+
 
                 TableLayoutControl.setLayoutTables(tableList, modelGetTable);
             }

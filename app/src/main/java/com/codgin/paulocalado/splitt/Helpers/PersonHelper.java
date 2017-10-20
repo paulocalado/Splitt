@@ -8,6 +8,7 @@ import com.codgin.paulocalado.splitt.Model.Person;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.Model.User;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,6 +26,8 @@ public class PersonHelper {
 
     public static void getPeopleHelper(final ModelGetPerson modelGetPerson){
         final List<Person> personList = new ArrayList<>();
+        final DocumentReference tableRef = FirebaseFirestore.getInstance().document("users/"+
+                        modelGetPerson.getUser().getIdUser()+"/tables/"+modelGetPerson.getTable().getNameTable());
 
         modelGetPerson.getRefPerson().addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -42,6 +45,7 @@ public class PersonHelper {
                     modelGetPerson.getImageEmpty().setVisibility(View.GONE);
                     modelGetPerson.getTextEmpty().setVisibility(View.GONE);
                 }
+                tableRef.update("qtPeople", personList.size());
 
                 PeopleLayoutControl.setLayoutRVPeople(personList, modelGetPerson);
             }
