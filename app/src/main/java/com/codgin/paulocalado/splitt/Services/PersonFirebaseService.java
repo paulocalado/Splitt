@@ -11,7 +11,10 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by paulocalado on 11/10/17.
@@ -39,16 +42,22 @@ public class PersonFirebaseService {
     public static void addProductPerson(List<Person> personList, User user, Table table, Product product){
         double totalPerPerson;
 
+
+
         for(Person person : personList){
             DocumentReference personRef = FirebaseFirestore.getInstance().document("users/"+user.getIdUser()+
                     "/tables/"+table.getNameTable()+"/people/"+person.getName());
+            DocumentReference productPersonRef = FirebaseFirestore.getInstance().document("users/"+user.getIdUser()+
+                    "/tables/"+table.getNameTable()+"/people/"+person.getName()+"/productList/"+product.getProductName());
 
             totalPerPerson = CalculatorControl.totalProductPerPerson(product.getProductQt(),
                     personList.size(),product.getProductPrice());
 
             totalPerPerson+=person.getTotal();
 
+            productPersonRef.set(product);
             personRef.update("total", totalPerPerson);
+
 
         }
     }

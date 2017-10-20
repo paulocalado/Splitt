@@ -15,6 +15,7 @@ public class User implements Serializable{
     String nameUser;
     Map<String, Table> tablesUser;
 
+
     public User(){}
 
     public String getIdUser() {

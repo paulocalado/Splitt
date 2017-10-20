@@ -158,7 +158,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                     if(isChecked){
                         checkedPeople.add(person);
-                        //listaPessoa.remove(pessoa);
+
                     }else{
                         checkedPeople.remove(person);
                     }
@@ -177,7 +177,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
 
                 ProductFirebaseService.addProductTable(user,table,productToAdd);
                 PersonFirebaseService.addProductPerson(checkedPeople, user, table, productToAdd);
-                
+
                 dialog.dismiss();
             }
         });

@@ -1,6 +1,6 @@
 package com.codgin.paulocalado.splitt.Model;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * Created by Paulo on 07/10/2017.
@@ -10,7 +10,7 @@ public class Person {
     String name;
     double total;
     double totalWithTip;
-    Map<String, Product> productMap;
+    List<Product> productList;
 
     public Person(){}
 
@@ -30,12 +30,12 @@ public class Person {
         this.totalWithTip = totalWithTip;
     }
 
-    public Map<String, Product> getProductMap() {
-        return productMap;
+    public List<Product> getProductList() {
+        return productList;
     }
 
-    public void setProductMap(Map<String, Product> productMap) {
-        this.productMap = productMap;
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
     public String getName() {
