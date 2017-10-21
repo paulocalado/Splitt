@@ -1,16 +1,27 @@
 package com.codgin.paulocalado.splitt.Control;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.codgin.paulocalado.splitt.Adapters.PeopleAdapter;
+import com.codgin.paulocalado.splitt.Adapters.ProductAdapter;
 import com.codgin.paulocalado.splitt.Model.ModelGetPerson;
 import com.codgin.paulocalado.splitt.Model.Person;
+import com.codgin.paulocalado.splitt.Model.Product;
 import com.codgin.paulocalado.splitt.R;
 import com.codgin.paulocalado.splitt.RecyclerItemClickListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +30,7 @@ import java.util.List;
 
 public class PeopleLayoutControl {
 
-    public static void setLayoutRVPeople(final List<Person> personList, ModelGetPerson modelGetPerson){
+    public static void setLayoutRVPeople(final List<Person> personList, final ModelGetPerson modelGetPerson){
         PeopleAdapter adapter = new PeopleAdapter(personList);
         LinearLayoutManager llm = new LinearLayoutManager(modelGetPerson.getContext());
         modelGetPerson.getRvPerson().setLayoutManager(llm);
@@ -28,7 +39,7 @@ public class PeopleLayoutControl {
                 modelGetPerson.getRvPerson(), new RecyclerItemClickListener.OnItemClickListener(){
                     @Override
                     public void onItemClick(View view, int position) {
-
+                        dialogPersonDetail(personList.get(position), modelGetPerson);
                     }
 
                     @Override
@@ -38,29 +49,37 @@ public class PeopleLayoutControl {
                 }));
     }
 
-    public void dialogPersonDetail(ModelGetPerson modelGetPerson){
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(modelGetPerson.getContext());
-        builder1.setMessage(R.string.title_criar_mesa_dialog);
-        builder1.setCancelable(false);
+    public static void dialogPersonDetail(Person person, final ModelGetPerson modelGetPerson){
+        final List<Product> productList = new ArrayList<>();
+        final Dialog dialog = new Dialog(modelGetPerson.getContext());
+        dialog.setContentView(R.layout.layout_person_detail);
+        dialog.setTitle("Adicione a seu Pedido");
 
-        builder1.setPositiveButton(
-                R.string.positive_button,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+        final RecyclerView rvProductPersonDetail = (RecyclerView)dialog.findViewById(R.id.rvProductpersonDetail);
 
-                        dialog.cancel();
-                    }
-                });
+        CollectionReference productsRef =  FirebaseFirestore.getInstance().collection("users/"+modelGetPerson.getUser().getIdUser()+
+                "/tables/"+modelGetPerson.getTable().getNameTable()+"/people/"+person.getName()+"/productList");
 
-        builder1.setNegativeButton(
-                R.string.negative_button,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
+        productsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+                if(productList.size()!=0){
+                    productList.clear();
+                }
 
-        AlertDialog alert11 = builder1.create();
-        alert11.show();
+                for(DocumentSnapshot document : documentSnapshots){
+                    productList.add(document.toObject(Product.class));
+                }
+
+                ProductAdapter adapter = new ProductAdapter(productList);
+                LinearLayoutManager llm = new LinearLayoutManager(modelGetPerson.getContext());
+                rvProductPersonDetail.setLayoutManager(llm);
+                rvProductPersonDetail.setAdapter(adapter);
+
+            }
+        });
+
+        dialog.show();
+
     }
 }
