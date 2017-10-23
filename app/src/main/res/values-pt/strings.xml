@@ -19,4 +19,6 @@
     <string name="subtitulo_listaPessoas_dialog_produto">Com quem você vai dividir?</string>
 
     <string name="preco_produto">Preço R$:</string>
+
+    <string name="text_detalhe_pessoa">aqui esta o que você consumiu ate agora: </string>
 </resources>

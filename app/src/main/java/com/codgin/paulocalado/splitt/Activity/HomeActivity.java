@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.codgin.paulocalado.splitt.Fragments.PeopleFragment;
 import com.codgin.paulocalado.splitt.Fragments.ProductFragment;
+import com.codgin.paulocalado.splitt.Fragments.TipFragment;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.Model.User;
 import com.codgin.paulocalado.splitt.R;
@@ -48,6 +49,15 @@ public class HomeActivity extends AppCompatActivity {
                             .commit();
                     return true;
                 case R.id.navigation_notifications:
+                    TipFragment tipFragment = new TipFragment();
+                    bundle.putSerializable("table", table);
+                    bundle.putSerializable("user", user);
+                    tipFragment.setArguments(bundle);
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.content, tipFragment, "tipFragment")
+                            .addToBackStack(null)
+                            .commit();
                     return true;
             }
             return false;

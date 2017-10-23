@@ -23,6 +23,8 @@
 
     <string name="preco_produto">Price $:</string>
 
+    <string name="text_detalhe_pessoa">here is what you have consumed so far: </string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

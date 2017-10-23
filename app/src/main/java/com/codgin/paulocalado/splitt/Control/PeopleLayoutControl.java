@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.codgin.paulocalado.splitt.Adapters.PeopleAdapter;
 import com.codgin.paulocalado.splitt.Adapters.ProductAdapter;
@@ -64,6 +65,10 @@ public class PeopleLayoutControl {
         dialog.setTitle("Adicione a seu Pedido");
 
         final RecyclerView rvProductPersonDetail = (RecyclerView)dialog.findViewById(R.id.rvProductpersonDetail);
+        TextView txtPersonDetail = (TextView)dialog.findViewById(R.id.textDetalhePessoa);
+
+        txtPersonDetail.setText(person.getName()+", "+
+                modelGetPerson.getContext().getResources().getString(R.string.text_detalhe_pessoa));
 
         CollectionReference productsRef =  FirebaseFirestore.getInstance().collection("users/"+modelGetPerson.getUser().getIdUser()+
                 "/tables/"+modelGetPerson.getTable().getNameTable()+"/people/"+person.getName()+"/productList");
