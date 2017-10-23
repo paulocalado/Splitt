@@ -73,8 +73,10 @@ public class PeopleFragment extends Fragment implements View.OnClickListener {
         RecyclerView rvPerson = (RecyclerView)v.findViewById(R.id.rvPerson);
         TextView txtEmpty = (TextView)v.findViewById(R.id.empty_view);
         ImageView imgEmpty = (ImageView)v.findViewById(R.id.sadImage);
+        TextView txtTotal = (TextView)v.findViewById(R.id.txtTotalMesaPeople);
 
-        modelGetPerson = new ModelGetPerson(rvPerson, getContext(),imgEmpty,txtEmpty,user,table);
+
+        modelGetPerson = new ModelGetPerson(rvPerson, getContext(),imgEmpty,txtEmpty,user,table, txtTotal);
 
         PersonFirebaseService.getPeopleFirebase(modelGetPerson);
         return v;

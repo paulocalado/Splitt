@@ -23,6 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Created by paulocalado on 13/10/17.
@@ -31,6 +32,7 @@ import java.util.List;
 public class PeopleLayoutControl {
 
     public static void setLayoutRVPeople(final List<Person> personList, final ModelGetPerson modelGetPerson){
+        double totalMesa =0;
         PeopleAdapter adapter = new PeopleAdapter(personList);
         LinearLayoutManager llm = new LinearLayoutManager(modelGetPerson.getContext());
         modelGetPerson.getRvPerson().setLayoutManager(llm);
@@ -47,6 +49,12 @@ public class PeopleLayoutControl {
 
                     }
                 }));
+
+        for(Person person : personList){
+            totalMesa+=person.getTotal();
+        }
+        modelGetPerson.getTxtTotalMesa().setText(modelGetPerson.getContext().getResources().getString(R.string.total_mesa)
+                +String.format("%.2f",totalMesa));
     }
 
     public static void dialogPersonDetail(Person person, final ModelGetPerson modelGetPerson){

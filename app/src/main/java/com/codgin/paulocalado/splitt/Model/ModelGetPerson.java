@@ -19,11 +19,13 @@ public class ModelGetPerson {
     TextView textEmpty;
     User user;
     Table table;
+    TextView txtTotalMesa;
+
 
     public ModelGetPerson(
                           RecyclerView rvPerson, Context context,
                           ImageView imageEmpty, TextView textEmpty,
-                          User user, Table table) {
+                          User user, Table table, TextView txtTotalMesa) {
 
         this.rvPerson = rvPerson;
         this.context = context;
@@ -31,8 +33,16 @@ public class ModelGetPerson {
         this.textEmpty = textEmpty;
         this.user = user;
         this.table = table;
+        this.txtTotalMesa = txtTotalMesa;
     }
 
+    public TextView getTxtTotalMesa() {
+        return txtTotalMesa;
+    }
+
+    public void setTxtTotalMesa(TextView txtTotalMesa) {
+        this.txtTotalMesa = txtTotalMesa;
+    }
 
     public CollectionReference getRefPerson() {
         return refPerson;
