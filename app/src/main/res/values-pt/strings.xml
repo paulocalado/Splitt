@@ -21,4 +21,7 @@
     <string name="preco_produto">Preço R$:</string>
 
     <string name="text_detalhe_pessoa">aqui esta o que você consumiu ate agora: </string>
+    <string name="text_titulo_tip_fragment">E ai terminou? Você pode adicionar a gorjeta e a gente faz as contas :D</string>
+    <string name="text_total_mesa_sem_tip">Total da sua mesa sem gorjeta: R$</string>
+    <string name="text_percent_tip">Qual a porcentagem da gorjeta?</string>
 </resources>

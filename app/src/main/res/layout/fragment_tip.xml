@@ -1,14 +1,76 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2bd1fc"
     tools:context="com.codgin.paulocalado.splitt.Fragments.TipFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:background="#2bd1fc"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/text_titulo_tip_fragment"
+        android:textColor="#c04df9"
+        android:paddingBottom="20dp"
+        android:textSize="20dp"
+        android:layout_marginTop="13dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <View style="@style/Divider"
+
+        android:id="@+id/viewDivider"
+       android:layout_below="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/txtTotalMesaTip"
+        android:textSize="15dp"
+        android:textColor="#c04df9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="37dp"
+        android:text="TextView"
+        android:layout_below="@+id/viewDivider"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/edit_valor_dialog"
+        android:layout_width="match_parent"
+        android:textColorHint="#c04df9"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_below="@+id/txtTotalMesaTip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/txtTotalMesaTip"
+        android:layout_alignEnd="@+id/txtTotalMesaTip">
+
+        <EditText
+            android:id="@+id/editText"
+            android:textColor="#c04df9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/edtDialogNomeProduto"
+            android:layout_marginTop="36dp"
+            android:hint="@string/text_percent_tip"
+            android:inputType="number" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnAddTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="Button"
+        android:layout_below="@+id/edit_valor_dialog"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
