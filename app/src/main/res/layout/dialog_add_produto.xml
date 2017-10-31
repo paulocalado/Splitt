@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="#f3ea5f"
+    android:id="@+id/rvDialog"
     android:layout_height="match_parent">
 
     <android.support.design.widget.TextInputLayout

@@ -8,6 +8,8 @@
         android:paddingBottom="15dp"
         android:paddingTop="15dp"
         android:layout_width="match_parent"
+        card_view:cardCornerRadius="20dp"
+        card_view:cardElevation="5dp"
         android:layout_height="60dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"

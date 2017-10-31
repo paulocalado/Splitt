@@ -1,17 +1,25 @@
 package com.codgin.paulocalado.splitt.Fragments;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -45,6 +53,8 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    public FloatingActionButton fab;
 
     public Table table;
     public User user;
@@ -96,6 +106,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
                 textEmpty, user, table);
 
         ProductFirebaseService.getProduct(modelGetProduct);
+        fab = (FloatingActionButton)v.findViewById(R.id.floatAddProduct);
 
         v.findViewById(R.id.floatAddProduct).setOnClickListener(this);
 
@@ -137,9 +148,15 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
     }
 
     public void dialogAddProduto(){
-        final Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.dialog_add_produto);
+       // final Dialog dialog = new Dialog(getContext());
+        final View dialogView = View.inflate(getContext(),R.layout.dialog_add_produto,null);
+
+        final Dialog dialog = new Dialog(getContext(),R.style.MyAlertDialogStyle);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(dialogView);
+       //        dialog.setContentView(R.layout.dialog_add_produto);
         dialog.setTitle("Adicione a seu Pedido");
+
 
         final List<Person> checkedPeople = new ArrayList<>();
         LinearLayout linearLayout = (LinearLayout) dialog.findViewById(R.id.lista_pessoa_dialog);
@@ -147,6 +164,14 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
         final TextInputLayout edtProductPrice = (TextInputLayout)dialog.findViewById(R.id.edit_valor_dialog);
         final TextInputLayout edtProductQt = (TextInputLayout)dialog.findViewById(R.id.edit_quantidade_produto);
         Button btnAddProduct = (Button)dialog.findViewById(R.id.btnAdicionarProduto);
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                revealShow(dialogView, true, null);
+            }
+        });
 
         for(final Person person: personList){
             CheckBox checkBox = new AppCompatCheckBox(getContext());
@@ -183,5 +208,46 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
         });
 
         dialog.show();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void revealShow(View dialogView, boolean b, final Dialog dialog) {
+
+        final View view = dialogView.findViewById(R.id.rvDialog);
+
+        int w = view.getWidth();
+        int h = view.getHeight();
+
+        int endRadius = (int) Math.hypot(w, h);
+
+        int cx = (int) (fab.getX() + (fab.getWidth()/2));
+        int cy = (int) (fab.getY())+ fab.getHeight() + 56;
+
+
+        if(b){
+            Animator revealAnimator = ViewAnimationUtils.createCircularReveal(view, cx,cy, 0, endRadius);
+
+            view.setVisibility(View.VISIBLE);
+            revealAnimator.setDuration(700);
+            revealAnimator.start();
+
+        } else {
+
+            Animator anim =
+                    ViewAnimationUtils.createCircularReveal(view, cx, cy, endRadius, 0);
+
+            anim.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    dialog.dismiss();
+                    view.setVisibility(View.INVISIBLE);
+
+                }
+            });
+            anim.setDuration(700);
+            anim.start();
+        }
+
     }
 }
