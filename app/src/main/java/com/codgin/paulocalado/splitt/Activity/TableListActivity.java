@@ -71,6 +71,7 @@ public class TableListActivity extends AppCompatActivity implements View.OnClick
         AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
         builder1.setMessage(R.string.title_criar_mesa_dialog);
         builder1.setCancelable(false);
+
         final EditText input = new EditText(this);
         input.setHint(R.string.hint_criar_mesa_dialog);
         builder1.setView(input);
@@ -94,6 +95,7 @@ public class TableListActivity extends AppCompatActivity implements View.OnClick
                 });
 
         AlertDialog alert11 = builder1.create();
+        alert11.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;
         alert11.show();
     }
 }
