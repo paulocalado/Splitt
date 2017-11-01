@@ -23,7 +23,9 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 /**
@@ -58,11 +60,10 @@ public class PeopleLayoutControl {
                 +String.format("%.2f",totalMesa));
     }
 
-    public static void dialogPersonDetail(Person person, final ModelGetPerson modelGetPerson){
-        final List<Product> productList = new ArrayList<>();
+    public static void dialogPersonDetail(final Person person, final ModelGetPerson modelGetPerson){
+
         final Dialog dialog = new Dialog(modelGetPerson.getContext());
         dialog.setContentView(R.layout.layout_person_detail);
-
 
         final RecyclerView rvProductPersonDetail = (RecyclerView)dialog.findViewById(R.id.rvProductpersonDetail);
         TextView txtPersonDetail = (TextView)dialog.findViewById(R.id.textDetalhePessoa);
@@ -70,27 +71,10 @@ public class PeopleLayoutControl {
         txtPersonDetail.setText(person.getName()+", "+
                 modelGetPerson.getContext().getResources().getString(R.string.text_detalhe_pessoa));
 
-        CollectionReference productsRef =  FirebaseFirestore.getInstance().collection("users/"+modelGetPerson.getUser().getIdUser()+
-                "/tables/"+modelGetPerson.getTable().getNameTable()+"/people/"+person.getName()+"/productList");
-
-        productsRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
-                if(productList.size()!=0){
-                    productList.clear();
-                }
-
-                for(DocumentSnapshot document : documentSnapshots){
-                    productList.add(document.toObject(Product.class));
-                }
-
-                ProductAdapter adapter = new ProductAdapter(productList);
+             /*   ProductAdapter adapter = new ProductAdapter(person.getProductList());
                 LinearLayoutManager llm = new LinearLayoutManager(modelGetPerson.getContext());
                 rvProductPersonDetail.setLayoutManager(llm);
-                rvProductPersonDetail.setAdapter(adapter);
-
-            }
-        });
+                rvProductPersonDetail.setAdapter(adapter);*/
 
         dialog.show();
 

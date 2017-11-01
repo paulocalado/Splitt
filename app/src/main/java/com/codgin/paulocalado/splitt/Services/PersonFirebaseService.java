@@ -47,17 +47,24 @@ public class PersonFirebaseService {
         for(Person person : personList){
             DocumentReference personRef = FirebaseFirestore.getInstance().document("users/"+user.getIdUser()+
                     "/tables/"+table.getNameTable()+"/people/"+person.getName());
-            DocumentReference productPersonRef = FirebaseFirestore.getInstance().document("users/"+user.getIdUser()+
-                    "/tables/"+table.getNameTable()+"/people/"+person.getName()+"/productList/"+product.getProductName());
+
 
             totalPerPerson = CalculatorControl.totalProductPerPerson(product.getProductQt(),
                     personList.size(),product.getProductPrice());
+            product.setProductTotalPerPerson(totalPerPerson);
 
             totalPerPerson+=person.getTotal();
 
-            productPersonRef.set(product);
-            personRef.update("total", totalPerPerson);
+            Map<String, Product> mapProduct = new HashMap<>();
 
+            if(person.getProductList()!= null){
+                mapProduct = person.getProductList();
+            }
+            
+            mapProduct.put(product.getProductName(), product);
+            person.setProductList(mapProduct);
+            person.setTotal(totalPerPerson);
+            personRef.set(person);
 
         }
     }

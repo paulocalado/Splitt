@@ -9,6 +9,7 @@ public class Product {
     double productPrice;
     int productQt;
     double productTotal;
+    double productTotalPerPerson;
 
     public Product(String productName, double productPrice, int productQt) {
         this.productName = productName;
@@ -17,6 +18,14 @@ public class Product {
     }
 
     public Product(){}
+
+    public double getProductTotalPerPerson() {
+        return productTotalPerPerson;
+    }
+
+    public void setProductTotalPerPerson(double productTotalPerPerson) {
+        this.productTotalPerPerson = productTotalPerPerson;
+    }
 
     public double getProductTotal() {
         return productTotal;
