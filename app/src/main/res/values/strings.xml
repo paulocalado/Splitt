@@ -28,6 +28,10 @@
     <string name="text_total_mesa_sem_tip">Your Table total without tip: $</string>
     <string name="text_percent_tip">What is the % you going to give?</string>
 
+    <string name="hey">Hey, </string>
+    <string name="choose_delete_update_dialog">What do you want to choose?</string>
+    <string name="update_product">Add more </string>
+    <string name="delete_product">Delete </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

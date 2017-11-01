@@ -24,4 +24,9 @@
     <string name="text_titulo_tip_fragment">E ai terminou? Você pode adicionar a gorjeta e a gente faz as contas :D</string>
     <string name="text_total_mesa_sem_tip">Total da sua mesa sem gorjeta: R$</string>
     <string name="text_percent_tip">Qual a porcentagem da gorjeta?</string>
+
+    <string name="hey">E aí, </string>
+    <string name="choose_delete_update_dialog">O que você quer fazer?</string>
+    <string name="update_product">Adicionar mais </string>
+    <string name="delete_product">Deletar </string>
 </resources>

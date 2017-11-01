@@ -46,4 +46,8 @@ public class ProductFirebaseService {
 
         ProductHelper.getProduct(modelGetProduct);
     }
+
+    public static void deleteProduct(ModelGetProduct modelGetProduct){
+
+    }
 }

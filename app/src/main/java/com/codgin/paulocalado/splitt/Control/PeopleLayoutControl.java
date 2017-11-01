@@ -62,7 +62,7 @@ public class PeopleLayoutControl {
         final List<Product> productList = new ArrayList<>();
         final Dialog dialog = new Dialog(modelGetPerson.getContext());
         dialog.setContentView(R.layout.layout_person_detail);
-        dialog.setTitle("Adicione a seu Pedido");
+
 
         final RecyclerView rvProductPersonDetail = (RecyclerView)dialog.findViewById(R.id.rvProductpersonDetail);
         TextView txtPersonDetail = (TextView)dialog.findViewById(R.id.textDetalhePessoa);
