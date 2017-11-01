@@ -1,5 +1,7 @@
 package com.codgin.paulocalado.splitt.Services;
 
+import android.util.Log;
+
 import com.codgin.paulocalado.splitt.Control.CalculatorControl;
 import com.codgin.paulocalado.splitt.Helpers.ProductHelper;
 import com.codgin.paulocalado.splitt.Helpers.TableHelper;
@@ -11,6 +13,7 @@ import com.codgin.paulocalado.splitt.Model.User;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.List;
 
@@ -47,7 +50,22 @@ public class ProductFirebaseService {
         ProductHelper.getProduct(modelGetProduct);
     }
 
-    public static void deleteProduct(ModelGetProduct modelGetProduct){
+    public static void deleteProduct(ModelGetProduct modelGetProduct, Product product){
+        CollectionReference productTableRef = FirebaseFirestore.getInstance().collection("users/"+
+                modelGetProduct.getUser().getIdUser()+
+                "/tables/"+modelGetProduct.getTable().getNameTable()+"/products");
+
+        DocumentReference tableRef = FirebaseFirestore.getInstance().document("users/"+
+                modelGetProduct.getUser().getIdUser()+
+                "/tables/"+modelGetProduct.getTable().getNameTable());
+
+        CollectionReference peopleRef = FirebaseFirestore.getInstance().collection("users/"+
+                modelGetProduct.getUser().getIdUser()+
+                "/tables/"+modelGetProduct.getTable().getNameTable()+"/people");
+
+        productTableRef.document(product.getProductName()).delete();
+        TableHelper.setTotalTable(productTableRef, tableRef);
+
 
     }
 }

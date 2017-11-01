@@ -13,6 +13,7 @@ import com.codgin.paulocalado.splitt.Model.ModelGetProduct;
 import com.codgin.paulocalado.splitt.Model.Product;
 import com.codgin.paulocalado.splitt.R;
 import com.codgin.paulocalado.splitt.RecyclerItemClickListener;
+import com.codgin.paulocalado.splitt.Services.ProductFirebaseService;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class ProductLayoutControl {
 
     }
 
-    public static void deleteOrUpdateDialog(Product product, ModelGetProduct modelGetProduct){
+    public static void deleteOrUpdateDialog(final Product product, final ModelGetProduct modelGetProduct){
         AlertDialog.Builder builder = new AlertDialog.Builder(modelGetProduct.getContext());
         builder.setTitle(modelGetProduct.getContext().getResources().getString(R.string.hey)+" "+
         modelGetProduct.getUser().getNameUser()+" "+
@@ -64,7 +65,7 @@ public class ProductLayoutControl {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        deleteProduct(modelGetProduct, product);
                     }
                 });
 
@@ -81,5 +82,7 @@ public class ProductLayoutControl {
         dialog.show();
     }
 
-    public static void deleteProduct(){}
+    public static void deleteProduct(ModelGetProduct modelGetProduct, Product product){
+        ProductFirebaseService.deleteProduct(modelGetProduct,product);
+    }
 }
