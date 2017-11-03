@@ -39,21 +39,25 @@ public class PersonFirebaseService {
             PersonHelper.getPeopleHelper(modelGetPerson);
         }
 
-    public static void addProductPerson(List<Person> personList, User user, Table table, Product product){
-        double totalPerPerson;
+        public static void setPerson(User user, Table table, List<Person> personList){
+            for(Person person : personList){
 
+                DocumentReference personRef = FirebaseFirestore.getInstance().document("users/"+user.getIdUser()+
+                        "/tables/"+table.getNameTable()+"/people/"+person.getName());
+
+                personRef.set(person);
+            }
+
+        }
+
+    public static void addProductPerson(List<Person> personList, User user, Table table, Product product,
+                                        double totalPerPerson){
 
 
         for(Person person : personList){
             DocumentReference personRef = FirebaseFirestore.getInstance().document("users/"+user.getIdUser()+
                     "/tables/"+table.getNameTable()+"/people/"+person.getName());
 
-
-            totalPerPerson = CalculatorControl.totalProductPerPerson(product.getProductQt(),
-                    personList.size(),product.getProductPrice());
-            product.setProductTotalPerPerson(totalPerPerson);
-
-            totalPerPerson+=person.getTotal();
 
             Map<String, Product> mapProduct = new HashMap<>();
 
@@ -63,7 +67,7 @@ public class PersonFirebaseService {
             
             mapProduct.put(product.getProductName(), product);
             person.setProductList(mapProduct);
-            person.setTotal(totalPerPerson);
+            person.setTotal(totalPerPerson+person.getTotal());
             personRef.set(person);
 
         }

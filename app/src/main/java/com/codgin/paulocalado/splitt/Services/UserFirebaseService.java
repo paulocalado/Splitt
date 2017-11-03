@@ -4,8 +4,6 @@ import android.content.Context;
 
 import com.codgin.paulocalado.splitt.Helpers.UserHelper;
 import com.codgin.paulocalado.splitt.Model.User;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 

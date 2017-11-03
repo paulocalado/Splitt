@@ -4,9 +4,12 @@ import android.view.View;
 
 import com.codgin.paulocalado.splitt.Control.PeopleLayoutControl;
 import com.codgin.paulocalado.splitt.Model.ModelGetPerson;
+import com.codgin.paulocalado.splitt.Model.ModelGetProduct;
 import com.codgin.paulocalado.splitt.Model.Person;
+import com.codgin.paulocalado.splitt.Model.Product;
 import com.codgin.paulocalado.splitt.Model.Table;
 import com.codgin.paulocalado.splitt.Model.User;
+import com.codgin.paulocalado.splitt.Services.PersonFirebaseService;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -71,5 +74,19 @@ public class PersonHelper {
         });
 
         return personList;
+    }
+
+    public static void deleteProductPerson(ModelGetProduct modelGetProduct, Product product){
+
+        for(Person person : modelGetProduct.getPersonList()){
+              if((person.getProductList()!=null)&&(person.getProductList().containsKey(product.getProductName()))){
+                  person.getProductList().remove(product.getProductName());
+                  person.setTotal(person.getTotal() - product.getProductTotalPerPerson());
+              }
+        }
+
+        PersonFirebaseService.setPerson(modelGetProduct.getUser(),
+                modelGetProduct.getTable(),
+                modelGetProduct.getPersonList());
     }
 }

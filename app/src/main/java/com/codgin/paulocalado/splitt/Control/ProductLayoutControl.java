@@ -9,6 +9,8 @@ import android.view.View;
 
 
 import com.codgin.paulocalado.splitt.Adapters.ProductAdapter;
+import com.codgin.paulocalado.splitt.Fragments.ProductFragment;
+import com.codgin.paulocalado.splitt.Helpers.PersonHelper;
 import com.codgin.paulocalado.splitt.Model.ModelGetProduct;
 import com.codgin.paulocalado.splitt.Model.Product;
 import com.codgin.paulocalado.splitt.R;
@@ -45,7 +47,7 @@ public class ProductLayoutControl {
     }
 
     public static void deleteOrUpdateDialog(final Product product, final ModelGetProduct modelGetProduct){
-        AlertDialog.Builder builder = new AlertDialog.Builder(modelGetProduct.getContext());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(modelGetProduct.getContext());
         builder.setTitle(modelGetProduct.getContext().getResources().getString(R.string.hey)+" "+
         modelGetProduct.getUser().getNameUser()+" "+
         modelGetProduct.getContext().getResources().getString(R.string.choose_delete_update_dialog));
@@ -65,7 +67,8 @@ public class ProductLayoutControl {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        deleteProduct(modelGetProduct, product);
+                        confirmDeleteDialog(product, modelGetProduct);
+                        dialogInterface.dismiss();
                     }
                 });
 
@@ -82,7 +85,30 @@ public class ProductLayoutControl {
         dialog.show();
     }
 
+    public static void confirmDeleteDialog(final Product product, final ModelGetProduct modelGetProduct){
+        AlertDialog.Builder builder = new AlertDialog.Builder(modelGetProduct.getContext());
+        builder.setTitle("Deseja excluir: "+product.getProductName()+"?");
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                deleteProduct(modelGetProduct, product);
+            }
+        });
+
+        builder.setNegativeButton("Nao", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        AlertDialog dialogConfirmDelete = builder.create();
+
+        dialogConfirmDelete.show();
+    }
+
     public static void deleteProduct(ModelGetProduct modelGetProduct, Product product){
         ProductFirebaseService.deleteProduct(modelGetProduct,product);
+        PersonHelper.deleteProductPerson(modelGetProduct,product);
     }
 }

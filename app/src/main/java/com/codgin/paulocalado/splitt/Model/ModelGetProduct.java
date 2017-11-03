@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.google.firebase.firestore.CollectionReference;
 
+import java.util.List;
+
 /**
  * Created by paulocalado on 16/10/17.
  */
@@ -17,6 +19,7 @@ public class ModelGetProduct {
     Context context;
     ImageView imageEmpty;
     TextView textEmpty;
+    List<Person> personList;
     User user;
     Table table;
 
@@ -27,6 +30,14 @@ public class ModelGetProduct {
         this.textEmpty = textEmpty;
         this.user = user;
         this.table = table;
+    }
+
+    public List<Person> getPersonList() {
+        return personList;
+    }
+
+    public void setPersonList(List<Person> personList) {
+        this.personList = personList;
     }
 
     public CollectionReference getRefProduct() {

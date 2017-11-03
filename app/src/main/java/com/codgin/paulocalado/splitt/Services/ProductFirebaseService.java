@@ -59,10 +59,6 @@ public class ProductFirebaseService {
                 modelGetProduct.getUser().getIdUser()+
                 "/tables/"+modelGetProduct.getTable().getNameTable());
 
-        CollectionReference peopleRef = FirebaseFirestore.getInstance().collection("users/"+
-                modelGetProduct.getUser().getIdUser()+
-                "/tables/"+modelGetProduct.getTable().getNameTable()+"/people");
-
         productTableRef.document(product.getProductName()).delete();
         TableHelper.setTotalTable(productTableRef, tableRef);
 

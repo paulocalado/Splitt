@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.codgin.paulocalado.splitt.Control.CalculatorControl;
 import com.codgin.paulocalado.splitt.Helpers.PersonHelper;
 import com.codgin.paulocalado.splitt.Model.ModelGetPerson;
 import com.codgin.paulocalado.splitt.Model.ModelGetProduct;
@@ -104,6 +105,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
 
         ModelGetProduct modelGetProduct = new ModelGetProduct(rvProduct,getContext(),sadImage,
                 textEmpty, user, table);
+        modelGetProduct.setPersonList(personList);
 
         ProductFirebaseService.getProduct(modelGetProduct);
         fab = (FloatingActionButton)v.findViewById(R.id.floatAddProduct);
@@ -200,8 +202,14 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
                         Double.parseDouble(edtProductPrice.getEditText().getText().toString()),
                         Integer.parseInt(edtProductQt.getEditText().getText().toString()));
 
+                double totalPerPerson = CalculatorControl.totalProductPerPerson(productToAdd.getProductQt(),
+                        checkedPeople.size(),productToAdd.getProductPrice());
+
+                productToAdd.setProductTotalPerPerson(totalPerPerson);
+
                 ProductFirebaseService.addProductTable(user,table,productToAdd);
-                PersonFirebaseService.addProductPerson(checkedPeople, user, table, productToAdd);
+
+                PersonFirebaseService.addProductPerson(checkedPeople, user, table, productToAdd, totalPerPerson);
 
                 dialog.dismiss();
             }
